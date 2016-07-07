@@ -1,0 +1,23 @@
+{
+  "name": "padel_championships",
+  "version": "1.0.0",
+  "description": "To start your Phoenix app:",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sports",
+    "padel",
+    "championships"
+  ],
+  "author": "Ismael Bermudez Fernandez",
+  "license": "ISC"
+}
