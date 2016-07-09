@@ -1,7 +1,7 @@
 defmodule PadelChampionships.UserController do
   use PadelChampionships.Web, :controller
 
-  alias PadelChampionships.{Repo, User}
+  alias PadelChampionships.{Repo, User, ChangesetView}
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -19,7 +19,7 @@ defmodule PadelChampionships.UserController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(PadelChampionships.ChangesetView, "error.json", changeset: changeset)
+        |> render(ChangesetView, "error.json", changeset: changeset)
     end
   end
 
@@ -34,7 +34,7 @@ defmodule PadelChampionships.UserController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(PadelChampionships.ChangesetView, "error.json", changeset: changeset)
+        |> render(ChangesetView, "error.json", changeset: changeset)
     end
   end
 

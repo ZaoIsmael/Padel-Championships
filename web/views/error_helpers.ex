@@ -26,7 +26,13 @@ defmodule PadelChampionships.ErrorHelpers do
     #
     #     dngettext "errors", "1 file", "%{count} files", count
     #
-    Gettext.dngettext(PadelChampionships.Gettext, "errors", msg, msg, opts[:count], opts)
+    Gettext.dngettext(
+      PadelChampionships.Gettext,
+      "errors",
+      msg,
+      msg,
+      opts[:count], opts
+    )
   end
 
   def translate_error(msg) do

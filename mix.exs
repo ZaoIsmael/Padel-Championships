@@ -1,6 +1,17 @@
 defmodule PadelChampionships.Mixfile do
   use Mix.Project
 
+  @app ~w(
+    phoenix
+    phoenix_html
+    cowboy
+    logger
+    gettext
+    phoenix_ecto
+    postgrex
+    comeonin
+  )a
+
   def project do
     [app: :padel_championships,
      version: "0.0.1",
@@ -17,9 +28,10 @@ defmodule PadelChampionships.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {PadelChampionships, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+    [
+      mod: {PadelChampionships, []},
+      applications: @app
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,6 +50,8 @@ defmodule PadelChampionships.Mixfile do
      {:gettext, "~> 0.9"},
      {:comeonin, "~> 2.0"},
      {:guardian, "~> 0.12"},
+     {:ex_guard, "~> 1.1.0", only: :dev},
+     {:credo, "~> 0.4.5", only: [:dev, :test]},
      {:cowboy, "~> 1.0"}]
   end
 

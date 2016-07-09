@@ -4,17 +4,25 @@ defmodule PadelChampionships.UserTest do
   alias PadelChampionships.User
 
   @valid_attrs %{
-    email: "some content",
-    encrypted_password: "some content",
+    email: "valid@email.com",
     first_name: "some content",
     last_name: "some content",
     level: "some content",
     photo: "some content",
     telephone: "some content",
     password: "password",
-    password_confirmation: "password_confirmation"
+    password_confirmation: "password"
   }
-  @invalid_attrs %{}
+  @invalid_attrs %{
+    email: "validemail.com",
+    first_name: "some content",
+    last_name: "some content",
+    level: "some content",
+    photo: "some content",
+    telephone: "some content",
+    password: "password",
+    password_confirmation: "password12"
+  }
 
   test "changeset with valid attributes" do
     changeset = User.changeset(%User{}, @valid_attrs)
