@@ -20,7 +20,7 @@ defmodule PadelChampionships.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      alias PadelChampionships.Repo
+      alias PadelChampionships.{Repo, User}
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]

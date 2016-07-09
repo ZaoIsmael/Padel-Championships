@@ -14,7 +14,6 @@ defmodule PadelChampionships.UserView do
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      encrypted_password: user.encrypted_password,
       photo: user.photo,
       telephone: user.telephone,
       level: user.level}

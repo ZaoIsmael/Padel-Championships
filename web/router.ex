@@ -22,6 +22,7 @@ defmodule PadelChampionships.Router do
   scope "/api", PadelChampionships do
     pipe_through :api
 
+    post "/registrations", RegistrationController, :create
     resources "/users", UserController, except: [:new, :edit]
   end
 end

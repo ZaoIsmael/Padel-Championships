@@ -10,9 +10,6 @@ defmodule PadelChampionships.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    # changeset = User.changeset(%User{}, user_params)
-    # Repo.insert(changeset)
-
     case %User{} |> User.changeset(user_params) |> Repo.insert do
       {:ok, user} ->
         conn
@@ -31,10 +28,6 @@ defmodule PadelChampionships.UserController do
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    # user = Repo.get!(User, id)
-    # changeset = User.changeset(user, user_params)
-    # Repo.update(changeset)
-
     case User |> Repo.get!(id) |> User.changeset(user_params) |> Repo.update do
       {:ok, user} ->
         render(conn, "show.json", user: user)
@@ -46,11 +39,8 @@ defmodule PadelChampionships.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    #user = Repo.get!(User, id)
-
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    #Repo.delete!(user)
 
     User |> Repo.get!(id) |> Repo.delete!
 
