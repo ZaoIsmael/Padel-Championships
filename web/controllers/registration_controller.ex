@@ -1,7 +1,7 @@
 defmodule PadelChampionships.RegistrationController  do
   use PadelChampionships.Web, :controller
 
-  alias PadelChampionships.{Repo, User, SessionView}
+  alias PadelChampionships.{Repo, User, SessionView, ChangesetView}
 
   plug :scrub_params, "user" when action in [:create]
 
@@ -17,7 +17,7 @@ defmodule PadelChampionships.RegistrationController  do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(SessionView, "error.json", changeset: changeset)
+        |> render(ChangesetView, "error.json", changeset: changeset)
     end
   end
 end

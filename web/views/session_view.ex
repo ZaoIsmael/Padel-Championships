@@ -3,8 +3,10 @@ defmodule PadelChampionships.SessionView do
 
   def render("show.json", %{jwt: jwt, user: user}) do
     %{
-      jwt: jwt,
-      user: user
+      data: %{
+        jwt: jwt,
+        user: render_one(user, PadelChampionships.UserView, "user.json")
+      }
     }
   end
 

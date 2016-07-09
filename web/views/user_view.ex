@@ -10,12 +10,14 @@ defmodule PadelChampionships.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id,
+    %{
+      id: user.id,
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
       photo: user.photo,
       telephone: user.telephone,
-      level: user.level}
+      level: user.level
+    }
   end
 end

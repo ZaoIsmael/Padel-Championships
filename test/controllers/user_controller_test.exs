@@ -2,33 +2,26 @@ defmodule PadelChampionships.UserControllerTest do
   use PadelChampionships.ConnCase
 
   @user %User{
-    email: "some content",
-    encrypted_password: "some content",
-    first_name: "some content",
-    last_name: "some content",
-    level: "some content",
-    photo: "some content",
-    telephone: "some content"
-  }
-  @valid_attrs %{
-    email: "some content",
-    encrypted_password: "some content",
+    email: "test@test.com",
     first_name: "some content",
     last_name: "some content",
     level: "some content",
     photo: "some content",
     telephone: "some content",
-    password: "password",
-    password_confirmation: "password_confirmation"
+    encrypted_password: "1224356df"
   }
-  @valid_attrs_without_virtual %{
-    email: "some content",
-    encrypted_password: "some content",
+  @valid_attrs %{
+    email: "test@test.com",
     first_name: "some content",
     last_name: "some content",
     level: "some content",
     photo: "some content",
-    telephone: "some content"
+    telephone: "some content",
+    password: "1224356df",
+    password_validation: "1224356df"
+  }
+  @get_user %{
+    email: "test@test.com",
   }
   @invalid_attrs %{}
 
@@ -62,7 +55,7 @@ defmodule PadelChampionships.UserControllerTest do
   test "creates and renders resource when data is valid", %{conn: conn} do
     conn = post conn, user_path(conn, :create), user: @valid_attrs
     assert json_response(conn, 201)["data"]["id"]
-    assert Repo.get_by(User, @valid_attrs_without_virtual)
+    assert Repo.get_by(User, @get_user)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
@@ -74,7 +67,7 @@ defmodule PadelChampionships.UserControllerTest do
     user = Repo.insert! @user
     conn = put conn, user_path(conn, :update, user), user: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
-    assert Repo.get_by(User, @valid_attrs_without_virtual)
+    assert Repo.get_by(User, @get_user)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
