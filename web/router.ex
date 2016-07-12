@@ -13,6 +13,8 @@ defmodule PadelChampionships.Router do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader
     plug Guardian.Plug.LoadResource
+    plug Guardian.Plug.EnsureAuthenticated,
+      handler: PadelChampionships.SessionController
   end
 
   scope "/", PadelChampionships do
@@ -22,9 +24,11 @@ defmodule PadelChampionships.Router do
   end
 
   scope "/api", PadelChampionships do
+    post "/session", SessionController, :create
+    post "/registrations", RegistrationController, :create
+
     pipe_through :api
 
-    post "/registrations", RegistrationController, :create
     resources "/users", UserController, except: [:new, :edit]
   end
 end

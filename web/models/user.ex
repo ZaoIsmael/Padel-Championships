@@ -4,6 +4,8 @@ defmodule PadelChampionships.User do
   use PadelChampionships.Web, :model
   alias Comeonin.Bcrypt
 
+   #@derive {Poison.Encoder, only: [:id]}
+
   schema "users" do
     field :first_name, :string
     field :last_name, :string
@@ -44,23 +46,24 @@ defmodule PadelChampionships.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    # |> validate_required(
+    # @required_fields, message: "Los campos no pueden estar vacios")
     |> validate_format(:email, ~r/@/, message: "El email no es valido")
+    |> unique_constraint(:email, message: "El email esta registrado")
     |> validate_length(:first_name, @validate_length_first_name)
     |> validate_length(:last_name, @validate_length_first_name)
     |> validate_length(:telephone, @validate_length_telephone)
     |> validate_length(:password, @validate_length_password)
     |> validate_confirmation(:password, message: "La contraseña no coinciden")
-    |> unique_constraint(:email, message: "El email esta registrado")
-    |> generate_encrypted_password
+    |> encrypted_password
   end
 
-  defp generate_encrypted_password(changeset) do
-   case changeset do
-     %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
-       changeset
-       |> put_change(:encrypted_password, Bcrypt.hashpwsalt(password))
-     _ ->
-       changeset
-   end
- end
+  defp encrypted_password(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    changeset
+    |> put_change(:encrypted_password, Bcrypt.hashpwsalt(password))
+  end
+
+  defp encrypted_password(%Ecto.Changeset{valid?: false} = changeset) do
+    changeset
+  end
 end

@@ -5,8 +5,8 @@ defmodule PadelChampionships.RegistrationController  do
 
   plug :scrub_params, "user" when action in [:create]
 
-  def create(conn, %{"user" => user_params}) do
-    case %User{} |> User.changeset(user_params) |> Repo.insert do
+  def create(conn, %{"user" => user}) do
+    case %User{} |> User.changeset(user) |> Repo.insert do
       {:ok, user} ->
         {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user, :token)
 

@@ -39,11 +39,7 @@ defmodule PadelChampionships.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-
     User |> Repo.get!(id) |> Repo.delete!
-
     send_resp(conn, :no_content, "")
   end
 end

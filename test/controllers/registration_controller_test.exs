@@ -1,6 +1,8 @@
 defmodule PadelChampionships.RegistrationControllerTest do
   use PadelChampionships.ConnCase
 
+  alias Comeonin.Bcrypt
+
   @valid_attrs %{
     email: "test@test.com",
     first_name: "some content",
@@ -12,26 +14,21 @@ defmodule PadelChampionships.RegistrationControllerTest do
     password_validation: "1224356df"
   }
 
-  @get_user %{
-    email: "test@test.com",
-  }
-
-  @invalid_attrs %{}
-
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
   test "user registration and create token", %{conn: conn} do
     conn = post conn, registration_path(conn, :create), user: @valid_attrs
+    user = Repo.get_by(User, email: @valid_attrs[:email])
 
-    assert json_response(conn, 201)["data"]["user"]["email"] == @valid_attrs.email
-    assert Repo.get_by(User, @get_user)
-    assert Guardian.decode_and_verify(json_response(conn, 201)["data"]["jwt"])
+    assert json_response(conn, 201)["data"]["user"]["email"] == @valid_attrs[:email]
+    assert Bcrypt.checkpw(@valid_attrs[:password], user.encrypted_password)
+    assert {:ok, _jwt} = Guardian.decode_and_verify(json_response(conn, 201)["data"]["jwt"])
   end
 
   test "user registration failed", %{conn: conn} do
-    conn = post conn, registration_path(conn, :create), user: @invalid_attrs
+    conn = post conn, registration_path(conn, :create), user: %{}
 
     assert json_response(conn, 422)["errors"] != %{}
   end
