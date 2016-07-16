@@ -16,7 +16,7 @@ defmodule PadelChampionships.SessionView do
     }
   end
 
-  def render("error.json", _) do
+  def render("error.json", _params) do
     %{error: "Invalid email or password"}
   end
 end

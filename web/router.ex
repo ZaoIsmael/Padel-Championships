@@ -21,6 +21,8 @@ defmodule PadelChampionships.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    post "/session", WebSessionController, :create
+    get "/session", WebSessionController, :new
   end
 
   scope "/api", PadelChampionships do
