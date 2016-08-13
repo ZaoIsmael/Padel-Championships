@@ -1,7 +1,7 @@
 defmodule PadelChampionships.RegistrationController  do
   use PadelChampionships.Web, :controller
 
-  alias PadelChampionships.{Repo, User, SessionView, ChangesetView}
+  alias PadelChampionships.{User, SessionView, ChangesetView}
 
   plug :scrub_params, "user" when action in [:create]
 

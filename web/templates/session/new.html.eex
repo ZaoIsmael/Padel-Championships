@@ -1,29 +1,32 @@
-<div id="cd-login"> <!-- log in form -->
-  <div class="Form">
-    <form class="cd-form">
-      <p class="fieldset">
-        <label class="image-replace cd-email" for="signin-email">E-mail</label>
-        <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-        <span class="cd-error-message">Error message here!</span>
-      </p>
+<div class="container-login"> <!-- log in form -->
+  <%= form_for @conn, web_session_path(@conn, :create), [class: "Form Form-login", name: "session"], fn f -> %>
+  <!-- <form class="Form Form-login"> -->
 
-      <p class="fieldset">
-        <label class="image-replace cd-password" for="signin-password">Password</label>
-        <input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">
-        <a href="#0" class="hide-password">Hide</a>
-        <span class="cd-error-message">Error message here!</span>
-      </p>
+    <p class="Form__row">
+      <label class="Form__label Form__label-image Form__label-image-username" for="signin-email">E-mail</label>
+      <%= email_input f, :email, class: "Form__input Form__input-fullwidth Form__input-padding", placeholder: "E-mail" %>
+      <!-- <input class="Form__input Form__input-fullwidth Form__input-padding" id="signin-email" type="email" placeholder="E-mail"> -->
+      <span class="Form__error">Error message here!</span>
+    </p>
 
-      <p class="fieldset">
-        <input type="checkbox" id="remember-me" checked>
-        <label for="remember-me">Remember me</label>
-      </p>
+    <p class="Form__row">
+      <label class="Form__label Form__label-image Form__label-image-password" for="signin-password">Password</label>
+      <%= password_input f, :password, class: "Form__input Form__input-fullwidth Form__input-padding", placeholder: "Password" %>
+      <!-- <input class="Form__input Form__input-fullwidth Form__input-padding" id="signin-password" type="text"  placeholder="Password"> -->
+      <span class="Form__error">Error message here!</span>
+    </p>
 
-      <p class="fieldset">
-        <input class="full-width" type="submit" value="Login">
-      </p>
-    </form>
+    <p class="Form__row">
+      <input type="checkbox" id="remember-me" checked>
+      <label for="remember-me">Remember me</label>
+    </p>
 
-    <p class="cd-form-bottom-message"><a href="#">Forgot your password?</a></p>
-  </div>
+    <p class="Form__row">
+      <%= submit "Login", class: "Button Button-primary Button-fullwidth" %>
+      <!-- <input class="Button Button-primary Button-fullwidth" type="submit" value="Login"> -->
+    </p>
+  <!-- </form> -->
+  <% end %>
+
+  <p class="cd-form-bottom-message"><a href="#">Forgot your password?</a></p>
 </div> <!-- cd-login -->

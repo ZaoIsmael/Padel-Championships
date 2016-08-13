@@ -1,7 +1,7 @@
 defmodule PadelChampionships.UserController do
   use PadelChampionships.Web, :controller
 
-  alias PadelChampionships.{Repo, User, ChangesetView}
+  alias PadelChampionships.{User, ChangesetView}
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -9,8 +9,8 @@ defmodule PadelChampionships.UserController do
     render(conn, "index.json", users: User |> Repo.all)
   end
 
-  def create(conn, %{"user" => user_params}) do
-    case %User{} |> User.changeset(user_params) |> Repo.insert do
+  def create(conn, %{"user" => user}) do
+    case %User{} |> User.changeset(user) |> Repo.insert do
       {:ok, user} ->
         conn
         |> put_status(:created)
@@ -27,8 +27,8 @@ defmodule PadelChampionships.UserController do
     render(conn, "show.json", user: User |> Repo.get!(id))
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    case User |> Repo.get!(id) |> User.changeset(user_params) |> Repo.update do
+  def update(conn, %{"id" => id, "user" => user}) do
+    case User |> Repo.get!(id) |> User.changeset(user) |> Repo.update do
       {:ok, user} ->
         render(conn, "show.json", user: user)
       {:error, changeset} ->

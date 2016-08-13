@@ -1,35 +1,32 @@
-#cd-login{
+.container-login{
   display: flex;
   height: 100%;
   justify-content: center;
   width: 100%;
   align-items: center;
+  flex-direction: column;
 }
 
 .Form{
-    width: 50%;
-    max-width: 400px;
+    padding: 1.4em;
 }
 
-.cd-form {
-  padding: 1.4em;
+.Form-login {
+  width: 50%;
+  max-width: 400px;
 }
-.cd-form .fieldset {
+
+.Form__row{
   position: relative;
   margin: 1.4em 0;
 }
-.cd-form .fieldset:first-child {
-  margin-top: 0;
-}
-.cd-form .fieldset:last-child {
-  margin-bottom: 0;
-}
-.cd-form label {
+
+.Form__label{
   font-size: 14px;
   font-size: 0.875rem;
 }
-.cd-form label.image-replace {
-  /* replace text with an icon */
+
+.Form__label-image{
   display: inline-block;
   position: absolute;
   left: 15px;
@@ -50,27 +47,23 @@
   background-repeat: no-repeat;
   background-position: 50% 0;
 }
-.cd-form label.cd-username {
+
+.Form__label-image-username{
   background-image: url("/images/icons/cd-icon-username.svg");
 }
-.cd-form label.cd-email {
+
+.Form__label-image-email{
   background-image: url("/images/icons/cd-icon-email.svg");
 }
-.cd-form label.cd-password {
+
+.Form__label-image-password{
   background-image: url("/images/icons/cd-icon-password.svg");
 }
-.cd-form input {
+
+.Form__input{
   margin: 0;
   padding: 0;
   border-radius: 0.25em;
-}
-.cd-form input.full-width {
-  width: 100%;
-}
-.cd-form input.has-padding {
-  padding: 12px 20px 12px 50px;
-}
-.cd-form input.has-border {
   border: 1px solid #d2d8d8;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -78,54 +71,22 @@
   -o-appearance: none;
   appearance: none;
 }
-.cd-form input.has-border:focus {
+
+.Form__input:focus{
   border-color: #343642;
   box-shadow: 0 0 5px rgba(52, 54, 66, 0.1);
   outline: none;
 }
-.cd-form input.has-error {
-  border: 1px solid #d76666;
+
+.Form__input-fullwidth{
+  width: 100%;
 }
-.cd-form input[type=password] {
-  /* space left for the HIDE button */
-  padding-right: 65px;
+
+.Form__input-padding{
+  padding: 12px 20px 12px 50px;
 }
-.cd-form input[type=submit] {
-  padding: 16px 0;
-  cursor: pointer;
-  background: #2f889a;
-  color: #FFF;
-  font-weight: bold;
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-}
-.no-touch .cd-form input[type=submit]:hover, .no-touch .cd-form input[type=submit]:focus {
-  background: #3599ae;
-  outline: none;
-}
-.cd-form .hide-password {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 6px 15px;
-  border-left: 1px solid #d2d8d8;
-  top: 50%;
-  bottom: auto;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  font-size: 14px;
-  font-size: 0.875rem;
-  color: #343642;
-}
-.cd-form .cd-error-message {
+
+.Form__error{
   display: inline-block;
   position: absolute;
   left: -5px;
@@ -145,8 +106,8 @@
   -moz-transition: opacity 0.2s 0, visibility 0 0.2s;
   transition: opacity 0.2s 0, visibility 0 0.2s;
 }
-.cd-form .cd-error-message::after {
-  /* triangle */
+
+.Form__error::after{
   content: '';
   position: absolute;
   left: 22px;
@@ -157,72 +118,30 @@
   border-right: 8px solid transparent;
   border-bottom: 8px solid rgba(215, 102, 102, 0.9);
 }
-.cd-form .cd-error-message.is-visible {
-  opacity: 1;
-  visibility: visible;
-  -webkit-transition: opacity 0.2s 0, visibility 0 0;
-  -moz-transition: opacity 0.2s 0, visibility 0 0;
-  transition: opacity 0.2s 0, visibility 0 0;
-}
-@media only screen and (min-width: 600px) {
-  .cd-form {
-    padding: 2em;
-  }
-  .cd-form .fieldset {
-    margin: 2em 0;
-  }
-  .cd-form .fieldset:first-child {
-    margin-top: 0;
-  }
-  .cd-form .fieldset:last-child {
-    margin-bottom: 0;
-  }
-  .cd-form input.has-padding {
-    padding: 16px 20px 16px 50px;
-  }
-  .cd-form input[type=submit] {
-    padding: 16px 0;
-  }
-}
 
-.cd-form-message {
-  padding: 1.4em 1.4em 0;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  text-align: center;
-}
-@media only screen and (min-width: 600px) {
-  .cd-form-message {
-    padding: 2em 2em 0;
-  }
-}
-
-.cd-form-bottom-message {
-  text-align: center;
-  font-size: 14px;
-  font-size: 0.875rem;
-}
-.cd-form-bottom-message a {
+.Button{
+  padding: 16px 0;
+  cursor: pointer;
+  background: #FFF;
   color: blue;
-  text-decoration: underline;
+  font-weight: bold;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
 }
 
-.cd-close-form {
-  /* form X button on top right */
-  display: block;
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  right: 0;
-  top: -40px;
-  background: url("/images/icons/cd-icon-close.svg") no-repeat center center;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+.Button-primary{
+  background: #2f889a;
+  color: #FFF;
+    &:hover,:focus{
+      background: #3599ae;
+      outline: none;
+    }
 }
-@media only screen and (min-width: 1170px) {
-  .cd-close-form {
-    display: none;
-  }
+
+.Button-fullwidth{
+  width: 100%;
 }

@@ -7,30 +7,49 @@ defmodule PadelChampionships.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
   end
 
   pipeline :api do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader
     plug Guardian.Plug.LoadResource
+  end
+
+  pipeline :api_auth do
     plug Guardian.Plug.EnsureAuthenticated,
       handler: PadelChampionships.SessionController
+  end
+
+  pipeline :browser_auth do
+    plug Guardian.Plug.EnsureAuthenticated,
+      handler: PadelChampionships.WebSessionController
+  end
+
+  scope "/", PadelChampionships do
+    pipe_through [:browser, :browser_auth]
+
+    get "/", PageController, :index
+    delete "/session", WebSessionController, :delete
   end
 
   scope "/", PadelChampionships do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    post "/session", WebSessionController, :create
-    get "/session", WebSessionController, :new
+    resources "/session", WebSessionController, only: [:create, :new]
   end
 
   scope "/api", PadelChampionships do
-    post "/session", SessionController, :create
-    post "/registrations", RegistrationController, :create
-
-    pipe_through :api
+    pipe_through [:api, :api_auth]
 
     resources "/users", UserController, except: [:new, :edit]
+  end
+
+  scope "/api", PadelChampionships do
+    pipe_through :api
+
+    resources "/session", SessionController, only: [:create, :delete]
+    post "/registrations", RegistrationController, :create
   end
 end

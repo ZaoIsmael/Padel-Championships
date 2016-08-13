@@ -4,8 +4,6 @@ defmodule PadelChampionships.User do
   use PadelChampionships.Web, :model
   alias Comeonin.Bcrypt
 
-   #@derive {Poison.Encoder, only: [:id]}
-
   schema "users" do
     field :first_name, :string
     field :last_name, :string
